@@ -5,13 +5,14 @@ date_default_timezone_set('Asia/Shanghai');
 class Alidayu{
 	
     private $topclient;
-    public function __construct() {
-        $this->topclient = new \TopClient(env('ALIDAYU_APP_KEY'), env('ALIDAYU_SECRETKEY'));
+    public function __construct($appkey,$secretkey) {
+        $this->topclient = new \TopClient($appkey, $secretkey);
     }
-    public function sendSms($phone, $template_code, Array $msg_param=null) {
+    public function sendSms($phone,$code,$template_code,$sign, Array $msg_param=null) {
         $req = new \AlibabaAliqinFcSmsNumSendRequest();
         $req->setSmsType('normal');
-        $req->setSmsFreeSignName(env('ALIDAYU_SIGN'));
+        $req->setExtend($code);
+        $req->setSmsFreeSignName($sign);
         if($msg_param) {
             $msg_param_json = json_encode($msg_param);
             $req->setSmsParam($msg_param_json);
