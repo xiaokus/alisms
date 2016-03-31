@@ -9,7 +9,6 @@
             "email": "53623075@qq.com"
         }
     ],
-    "minimum-stability": "dev",
     "autoload": {
         "classmap": [
           "src/"
